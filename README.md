@@ -1,0 +1,1 @@
+# API wrapper for yandex smart home platform
