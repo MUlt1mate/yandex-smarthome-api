@@ -75,7 +75,7 @@ func (c *Client) do(ctx context.Context, URI, method string, reqBody []byte) (ra
 	if req, err = http.NewRequestWithContext(ctx, method, c.APIHost+URI, reqReader); err != nil {
 		return nil, err
 	}
-	req.Header.Add("Authorization", "Bearer "+c.BearerToken)
+	req.Header.Set("Authorization", "Bearer "+c.BearerToken)
 	req.Header.Set("Content-Type", "application/json")
 
 	var resp *http.Response

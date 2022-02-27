@@ -13,7 +13,23 @@ type DeviceAction struct {
 	Type  string          `json:"type"`
 	State CapabilityState `json:"state"`
 }
+type DeviceActionResult struct {
+	Type  string                 `json:"type"`
+	State CapabilityChangeResult `json:"state"`
+}
+type ActionResult struct {
+	Status string `json:"status"`
+}
 
+type StateChangeResult struct {
+	Instance     string       `json:"instance"`
+	ActionResult ActionResult `json:"action_result"`
+}
+
+type CapabilityChangeResult struct {
+	Type  string            `json:"type"`
+	State StateChangeResult `json:"state"`
+}
 type CapabilityState interface {
 }
 
@@ -28,21 +44,17 @@ type CapabilityStateIntObject struct {
 
 type SendActionsResponse struct {
 	PlatformStatusResponse
-	SendActionsDeviceResponse
+	Devices []Device `json:"devices"`
 }
 
 type CapabilityResponse struct {
-	Type  string          `json:"type"`
-	State CapabilityState `json:"state"`
+	Type  string            `json:"type"`
+	State StateChangeResult `json:"state"`
 }
 
 type Device struct {
 	Id           string               `json:"id"`
 	Capabilities []CapabilityResponse `json:"capabilities"`
-}
-
-type SendActionsDeviceResponse struct {
-	Devices []Device `json:"devices"`
 }
 
 type GetDeviceInfoResponse struct {
@@ -71,11 +83,11 @@ type DeviceResponse struct {
 }
 
 type Capability struct {
-	Retrievable bool        `json:"retrievable"`
-	Type        string      `json:"type"`
-	Parameters  interface{} `json:"parameters"`
-	State       interface{} `json:"state"`
-	LastUpdated float32     `json:"last_updated"`
+	Retrievable bool                   `json:"retrievable"`
+	Type        string                 `json:"type"`
+	Parameters  map[string]interface{} `json:"parameters"`
+	State       map[string]interface{} `json:"state"`
+	LastUpdated float32                `json:"last_updated"`
 }
 
 type Property struct {
