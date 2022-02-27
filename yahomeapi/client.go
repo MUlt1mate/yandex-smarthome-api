@@ -16,6 +16,8 @@ const (
 )
 
 type APIClient interface {
+	GetDeviceInfo(ctx context.Context, deviceID string) (*GetDeviceInfoResponse, error)
+	SendActionsForDevice(ctx context.Context, actions SendActionsRequest) (*SendActionsResponse, error)
 }
 
 type Config struct {
