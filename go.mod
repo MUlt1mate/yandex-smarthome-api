@@ -1,3 +1,3 @@
-module yandex-smarthome-api
+module github.com/MUlt1mate/yandex-smarthome-api
 
 go 1.17
